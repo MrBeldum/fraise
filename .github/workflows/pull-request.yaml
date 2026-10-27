@@ -16,6 +16,16 @@ permissions:
   pull-requests: write
 
 jobs:
+  test-conventions:
+    name: Test branch conventions
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Test workflow branch regex
+        run: node --test .github/tests/branch-name.test.cjs
+
   label:
     # Labelling writes to the PR, and on the pull_request event a PR from a
     # fork only gets a read-only token: both steps would fail with a 403 and
@@ -102,7 +112,7 @@ jobs:
         uses: finleyfamily/action-enforce-branch-name@c26fb89a6bcfb2fd3af191be15cb03c2d977a41b
         continue-on-error: true
         with:
-          regex: '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\/[a-z0-9]+([-.][a-z0-9]+)*$'
+          regex: '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|deps|albedo)\/[a-z0-9]+([-.][a-z0-9]+)*$'
           exclude: main,master,develop
 
       # https://github.com/marocchino/sticky-pull-request-comment
@@ -145,7 +155,7 @@ jobs:
             fix/empty-response-body
             ```
 
-            Allowed types: `feat` `fix` `docs` `style` `refactor` `perf` `test` `build` `ci` `chore` `revert`
+            Allowed types: `feat` `fix` `docs` `style` `refactor` `perf` `test` `build` `ci` `chore` `revert` `deps`. Agent branches may use `albedo/short-description` with the same slug rules.
 
             Editing the PR title re-runs this check. To rename a branch:
             `git branch -m <new-name> && git push origin -u <new-name>`, then retarget the PR.

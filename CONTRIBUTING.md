@@ -58,7 +58,7 @@ docker run --rm -p 9876:9876 ghcr.io/fraisehq/fraise:edge
 ## Making a change
 
 1. **For anything non-trivial, open an issue first.** Not for permission — so nobody spends a weekend on something that's already half-built or heading in a different direction. Small fixes can go straight to a PR.
-2. **Create a branch named `type/short-description`** — e.g. `fix/empty-response-body`, `feat/rate-limiting`, `docs/sdk-py-readme`. The type must be one of `feat` `fix` `docs` `style` `refactor` `perf` `test` `build` `ci` `chore` `revert`. CI checks this on every PR.
+2. **Create a branch named `type/short-description`** — e.g. `fix/empty-response-body`, `feat/rate-limiting`, `docs/sdk-py-readme`. The type must be one of `feat` `fix` `docs` `style` `refactor` `perf` `test` `build` `ci` `chore` `revert` `deps`. Albedo automation may use `albedo/short-description`. Every slug must contain lowercase letters or digits separated by single hyphens or dots; nested paths and empty slugs are rejected. CI checks this on every PR.
 3. Make your change. Add a test if you're fixing a bug or adding behaviour.
 4. Run the checks locally:
 
